@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+<head><meta charset='utf-8'></head>
+<body>
+<canvas id="cv" width="200" height="100"></canvas>
+<script>
+  let ctx = document.getElementById('cv').getContext('2d'),
+      websocket = false,
+      connected = new Promise((resolve,reject) => {
+          websocket = new WebSocket('${url}');
+          websocket.onopen = () => { resolve() };
+      })
+      console.log = (str) => {connected.then(() => { websocket.send(str) }) };
+// -- here comes the document ...
+${code}
+</script>
+</body>
+</html>
